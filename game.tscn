@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbnjtxgxmtsia"]
+[gd_scene load_steps=5 format=3 uid="uid://cbnjtxgxmtsia"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_y0uxw"]
+[ext_resource type="Script" path="res://player.gd" id="2_2e4uc"]
+[ext_resource type="Texture2D" uid="uid://dja8v62olcewr" path="res://icon.svg" id="2_uad13"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8oppu"]
+size = Vector2(121, 121)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_y0uxw")
+
+[node name="Player" type="Area2D" parent="."]
+position = Vector2(31, 31)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("2_2e4uc")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("2_uad13")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_8oppu")
