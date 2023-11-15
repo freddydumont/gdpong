@@ -8,7 +8,7 @@ var player_offset
 func _ready():
 	screen_size = get_viewport_rect().size
 	## used with `clamp()` to prevent the player from going out of bounds
-	player_offset = $CollisionShape2D.shape.extents / 2
+	player_offset = $CollisionShape2D.shape.extents
 
 
 func _process(delta):
