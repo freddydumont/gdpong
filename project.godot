@@ -26,4 +26,3 @@ window/stretch/scale=3.0
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.145098, 0.145098, 0.145098, 1)
