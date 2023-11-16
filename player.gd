@@ -4,6 +4,8 @@ extends Area2D
 var screen_size
 var player_offset
 
+const PADDING_Y = Vector2(2, 2)
+
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -23,4 +25,6 @@ func _process(delta):
 		velocity = velocity.normalized() * speed
 
 	position += velocity * delta
-	position = position.clamp(Vector2.ZERO + player_offset, screen_size - player_offset)
+	position = position.clamp(
+		Vector2.ZERO + player_offset + PADDING_Y, screen_size - player_offset - PADDING_Y
+	)
