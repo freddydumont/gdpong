@@ -1,17 +1,5 @@
-extends Area2D
-
-@export var speed = 400
-var screen_size
-var player_offset
-
-const PADDING_Y = Vector2(2, 2)
-
-
-func _ready():
-	screen_size = get_viewport_rect().size
-	## used with `clamp()` to prevent the player from going out of bounds
-	player_offset = $CollisionShape2D.shape.extents
-
+class_name Player
+extends Paddle
 
 func _process(delta):
 	var velocity = Vector2.ZERO
@@ -26,5 +14,5 @@ func _process(delta):
 
 	position += velocity * delta
 	position = position.clamp(
-		Vector2.ZERO + player_offset + PADDING_Y, screen_size - player_offset - PADDING_Y
+		Vector2.ZERO + paddle_offset + PADDING_Y, screen_size - paddle_offset - PADDING_Y
 	)
