@@ -8,15 +8,9 @@ extends StaticBody2D
 var screen_size
 var paddle_offset
 
-## Used with clamp() to prevent paddle from touching the screen edge
-const PADDING_Y = Vector2(2, 2)
-
 
 func _ready():
 	screen_size = get_viewport_rect().size
-
-	## used with `clamp()` to prevent the player from going out of bounds
-	paddle_offset = $CollisionShape2D.shape.extents
 
 	# place the paddles on the screen
 	if is_player:

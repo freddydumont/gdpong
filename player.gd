@@ -2,7 +2,7 @@ class_name Player
 extends Paddle
 
 
-func _process(delta):
+func _physics_process(delta):
 	var velocity = Vector2.ZERO
 
 	if Input.is_action_pressed("ui_up"):
@@ -13,7 +13,4 @@ func _process(delta):
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 
-	position += velocity * delta
-	position = position.clamp(
-		Vector2.ZERO + paddle_offset + PADDING_Y, screen_size - paddle_offset - PADDING_Y
-	)
+	move_and_collide(velocity * delta)
