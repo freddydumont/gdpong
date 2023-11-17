@@ -24,7 +24,8 @@ is_player = true
 
 [node name="Enemy" parent="." instance=ExtResource("3_y6mnr")]
 
-[node name="Ball" type="Area2D" parent="."]
+[node name="Ball" type="CharacterBody2D" parent="."]
+motion_mode = 1
 script = ExtResource("3_av3xs")
 metadata/_edit_group_ = true
 
