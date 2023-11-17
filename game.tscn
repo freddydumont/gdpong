@@ -19,11 +19,10 @@ color = Color(0.180392, 0.180392, 0.180392, 1)
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("3_y6mnr")]
-position = Vector2(16, 240)
 script = ExtResource("2_2e4uc")
+is_player = true
 
 [node name="Enemy" parent="." instance=ExtResource("3_y6mnr")]
-position = Vector2(624, 240)
 
 [node name="Ball" type="Area2D" parent="."]
 script = ExtResource("3_av3xs")

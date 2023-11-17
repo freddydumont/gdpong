@@ -1,6 +1,7 @@
 class_name Player
 extends Paddle
 
+
 func _process(delta):
 	var velocity = Vector2.ZERO
 
