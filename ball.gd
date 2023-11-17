@@ -2,11 +2,13 @@ class_name Ball
 extends CharacterBody2D
 
 @export var color = Color.WHITE
-@export var speed = 240
+@export var initial_speed = 240
 @export var speed_increase = 60
 ## The maximum angle variation from the horizontal axis (in degrees).
 ## Goes in both y and -y so total sector is var * 2
 @export var launch_angle_range = 70
+
+var speed = initial_speed
 
 
 func _draw():
@@ -18,6 +20,7 @@ func _draw():
 func launch_ball():
 	# spawn the ball at the center
 	position = Vector2(get_viewport_rect().size / 2)
+	speed = initial_speed
 	velocity = Vector2.ZERO
 
 	# Calculate the launch angle, randomly pick between left and right directions
@@ -46,6 +49,5 @@ func _physics_process(delta):
 			velocity = velocity.normalized() * speed
 
 
-func _on_VisibilityNotifier2D_screen_exited():
-	# Deletes the ball when it exits the screen
-	queue_free()
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	launch_ball()

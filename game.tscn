@@ -38,6 +38,9 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
 shape = SubResource("CircleShape2D_05fki")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Ball"]
+rect = Rect2(-4, -4, 8, 8)
+
 [node name="WallTop" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
@@ -48,3 +51,5 @@ shape = SubResource("WorldBoundaryShape2D_4aike")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom"]
 position = Vector2(2.08165e-12, 480)
 shape = SubResource("WorldBoundaryShape2D_7ab5s")
+
+[connection signal="screen_exited" from="Ball/VisibleOnScreenNotifier2D" to="Ball" method="_on_visible_on_screen_notifier_2d_screen_exited"]
