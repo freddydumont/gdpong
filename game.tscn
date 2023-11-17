@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbnjtxgxmtsia"]
+[gd_scene load_steps=8 format=3 uid="uid://cbnjtxgxmtsia"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_y0uxw"]
 [ext_resource type="Script" path="res://player.gd" id="2_2e4uc"]
@@ -7,6 +7,11 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_05fki"]
 radius = 4.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4aike"]
+normal = Vector2(2.08165e-12, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ab5s"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_y0uxw")
@@ -31,3 +36,14 @@ metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
 shape = SubResource("CircleShape2D_05fki")
+
+[node name="WallTop" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
+shape = SubResource("WorldBoundaryShape2D_4aike")
+
+[node name="WallBottom" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom"]
+position = Vector2(2.08165e-12, 480)
+shape = SubResource("WorldBoundaryShape2D_7ab5s")
