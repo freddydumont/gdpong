@@ -12,8 +12,3 @@ func _ready():
 func _draw():
 	radius = $CollisionShape2D.shape.radius
 	draw_circle(Vector2.ZERO, radius, color)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
