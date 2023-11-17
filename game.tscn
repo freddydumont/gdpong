@@ -11,13 +11,13 @@ script = ExtResource("1_y0uxw")
 
 [node name="Background" type="ColorRect" parent="."]
 z_index = -1
-offset_right = 480.0
-offset_bottom = 320.0
+offset_right = 640.0
+offset_bottom = 480.0
 color = Color(0.180392, 0.180392, 0.180392, 1)
 metadata/_edit_lock_ = true
 
 [node name="Player" type="Area2D" parent="."]
-position = Vector2(16, 160)
+position = Vector2(16, 240)
 script = ExtResource("2_2e4uc")
 metadata/_edit_group_ = true
 
@@ -38,7 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Enemy" type="Area2D" parent="."]
-position = Vector2(464, 160)
+position = Vector2(624, 240)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
