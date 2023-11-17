@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbnjtxgxmtsia"]
+[gd_scene load_steps=4 format=3 uid="uid://cbnjtxgxmtsia"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_y0uxw"]
 [ext_resource type="Script" path="res://player.gd" id="2_2e4uc"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_v6jii"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8oppu"]
 size = Vector2(8, 32)
@@ -23,9 +21,10 @@ position = Vector2(16, 160)
 script = ExtResource("2_2e4uc")
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_8oppu")
 
-[node name="TextureRect" type="TextureRect" parent="Player/Sprite2D"]
+[node name="ColorRect" type="ColorRect" parent="Player"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -37,9 +36,3 @@ offset_right = 4.0
 offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = SubResource("CanvasTexture_v6jii")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("RectangleShape2D_8oppu")
