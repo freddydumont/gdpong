@@ -6,9 +6,15 @@ extends CharacterBody2D
 @export var speed_increase = 60
 ## The maximum angle variation from the horizontal axis (in degrees).
 ## Goes in both y and -y so total sector is var * 2
-@export var launch_angle_range = 70
+@export var launch_angle_range = 60
 
 var speed = initial_speed
+
+enum LaunchSide {
+	LEFT,
+	RIGHT,
+	RANDOM,
+}
 
 
 func _draw():
@@ -16,26 +22,30 @@ func _draw():
 	draw_circle(Vector2.ZERO, radius, color)
 
 
-## Launches the ball in a random direction when the game starts
-func launch_ball():
+## Launches the ball in a random direction when the game starts.
+## On reset, launches in the direction of the loser
+func launch_ball(side: Ball.LaunchSide):
 	# spawn the ball at the center
 	position = Vector2(get_viewport_rect().size / 2)
 	speed = initial_speed
 	velocity = Vector2.ZERO
 
-	# Calculate the launch angle, randomly pick between left and right directions
+	# Calculate the launch angle
 	var launch_angle = randf_range(-launch_angle_range, launch_angle_range)
 	launch_angle = deg_to_rad(launch_angle)
 
-	if randf() > 0.5:
-		launch_angle += PI  # This will send the ball to the right
+	# check which direction to launch
+	if side == LaunchSide.LEFT:
+		launch_angle += PI
+	elif side == LaunchSide.RANDOM and randf() > 0.5:
+		launch_angle += PI
 
 	# Set the velocity according to the launch angle and speed
 	velocity = Vector2(cos(launch_angle), sin(launch_angle)).normalized() * speed
 
 
 func _ready():
-	launch_ball()
+	launch_ball(LaunchSide.RANDOM)
 
 
 func _physics_process(delta):
@@ -48,6 +58,14 @@ func _physics_process(delta):
 			speed += speed_increase
 			velocity = velocity.normalized() * speed
 
-
+# TODO: implement scoring system
 func _on_visible_on_screen_notifier_2d_screen_exited():
-	launch_ball()
+	if position.x < 0:
+		# left lost
+		launch_ball(LaunchSide.LEFT)
+	elif position.x > get_viewport_rect().size.x:
+		# right lost
+		launch_ball(LaunchSide.RIGHT)
+	else:
+		printerr("ball exited screen at unexpected position: ", position)
+		launch_ball(LaunchSide.RANDOM)
