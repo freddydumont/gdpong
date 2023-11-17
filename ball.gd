@@ -2,7 +2,7 @@ class_name Ball
 extends CharacterBody2D
 
 @export var color = Color.WHITE
-@export var initial_speed = 4
+@export var initial_speed = 200
 ## The maximum angle variation from the horizontal axis (in degrees).
 ## Goes in both y and -y so total sector is var * 2
 @export var launch_angle_range = 70
@@ -34,5 +34,7 @@ func _ready():
 	launch_ball()
 
 
-func _physics_process(_delta):
-	move_and_collide(velocity)
+func _physics_process(delta):
+		var collision = move_and_collide(velocity * delta)
+		if collision:
+			velocity = velocity.bounce(collision.get_normal())

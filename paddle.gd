@@ -1,5 +1,5 @@
 class_name Paddle
-extends Area2D
+extends StaticBody2D
 
 @export var speed = 400
 @export var is_player: bool = false
