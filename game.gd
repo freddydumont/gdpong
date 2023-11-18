@@ -20,6 +20,7 @@ func _draw():
 	)
 
 
+# TODO: implement game win when a player reaches 11
 func _on_ball_round_won(winner: RoundWinner):
 	score[winner] += 1
 	$Scores/ScoreLeft.text = str(score[0])

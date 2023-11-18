@@ -2,6 +2,7 @@ class_name Player
 extends Paddle
 
 
+# TODO: add some friction to simulate acceleration rather than immediate full speed
 func _physics_process(delta):
 	var velocity = Vector2.ZERO
 

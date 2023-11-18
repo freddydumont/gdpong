@@ -59,6 +59,7 @@ func launch_ball(side: Ball.LaunchSide):
 
 
 func _ready():
+	# TODO: add a small delay on initial launch
 	launch_ball(LaunchSide.RANDOM)
 
 
@@ -70,6 +71,7 @@ func _physics_process(delta):
 		# when ball collides with paddle, increase its speed
 		if collision.get_collider() is Paddle:
 			speed += speed_increase
+			# TODO: limit collisions on paddles to avoid ball going straight up
 			velocity = velocity.normalized() * speed
 
 
