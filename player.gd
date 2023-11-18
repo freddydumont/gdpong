@@ -1,17 +1,20 @@
 class_name Player
 extends Paddle
 
+var acceleration = 16  # The rate of acceleration
+var velocity = Vector2.ZERO
 
-# TODO: add some friction to simulate acceleration rather than immediate full speed
+
 func _physics_process(delta):
-	var velocity = Vector2.ZERO
+	var target_velocity = Vector2.ZERO
 
 	if Input.is_action_pressed("ui_up"):
-		velocity.y -= 1
+		target_velocity.y = -speed
 	if Input.is_action_pressed("ui_down"):
-		velocity.y += 1
+		target_velocity.y = speed
 
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
+	# Using lerp to create a smooth transition from current velocity to target velocity,
+	# which gives the feeling of acceleration/friction
+	velocity.y = lerp(velocity.y, target_velocity.y, acceleration * delta)
 
-	move_and_collide(velocity * delta)
+	move_and_collide(velocity)

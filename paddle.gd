@@ -1,7 +1,7 @@
 class_name Paddle
 extends StaticBody2D
 
-@export var speed = 400
+@export var speed = 12
 @export var is_player: bool = false
 @export var padding_x = 16
 
