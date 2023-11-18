@@ -1,6 +1,10 @@
 class_name Ball
 extends CharacterBody2D
 
+const RoundWinner = preload("res://common.gd").RoundWinner
+
+signal round_won(winner: RoundWinner)
+
 @export var color = Color.WHITE
 @export var initial_speed = 240
 @export var speed_increase = 60
@@ -69,13 +73,12 @@ func _physics_process(delta):
 			velocity = velocity.normalized() * speed
 
 
-# TODO: implement scoring system
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	if position.x < 0:
-		# left lost
+		round_won.emit(RoundWinner.RIGHT)
 		launch_ball(LaunchSide.LEFT)
 	elif position.x > get_viewport_rect().size.x:
-		# right lost
+		round_won.emit(RoundWinner.LEFT)
 		launch_ball(LaunchSide.RIGHT)
 	else:
 		printerr("ball exited screen at unexpected position: ", position)

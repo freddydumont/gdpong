@@ -52,4 +52,5 @@ shape = SubResource("WorldBoundaryShape2D_4aike")
 position = Vector2(2.08165e-12, 480)
 shape = SubResource("WorldBoundaryShape2D_7ab5s")
 
+[connection signal="round_won" from="Ball" to="." method="_on_ball_round_won"]
 [connection signal="screen_exited" from="Ball/VisibleOnScreenNotifier2D" to="Ball" method="_on_visible_on_screen_notifier_2d_screen_exited"]
