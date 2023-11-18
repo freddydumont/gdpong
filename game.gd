@@ -22,3 +22,5 @@ func _draw():
 
 func _on_ball_round_won(winner: RoundWinner):
 	score[winner] += 1
+	$Scores/ScoreLeft.text = str(score[0])
+	$Scores/ScoreRight.text = str(score[1])
