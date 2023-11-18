@@ -23,6 +23,25 @@ offset_bottom = 480.0
 color = Color(0.180392, 0.180392, 0.180392, 1)
 metadata/_edit_lock_ = true
 
+[node name="Scores" type="HSplitContainer" parent="."]
+offset_right = 640.0
+offset_bottom = 128.0
+split_offset = 320
+
+[node name="ScoreLeft" type="Label" parent="Scores"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreRight" type="Label" parent="Scores"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Player" parent="." instance=ExtResource("3_y6mnr")]
 script = ExtResource("2_2e4uc")
 is_player = true
