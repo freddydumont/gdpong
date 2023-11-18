@@ -25,10 +25,20 @@ func _draw():
 ## Launches the ball in a random direction when the game starts.
 ## On reset, launches in the direction of the loser
 func launch_ball(side: Ball.LaunchSide):
-	# spawn the ball at the center
-	position = Vector2(get_viewport_rect().size / 2)
+	var viewport_size = get_viewport_rect().size
+	var screen_offset = get_parent().OFFSET
+
 	speed = initial_speed
 	velocity = Vector2.ZERO
+
+	# If first ball of the game, start the ball at the center
+	# Otherwise, random position along the center line
+	if side == LaunchSide.RANDOM:
+		position = Vector2(viewport_size / 2)
+	else:
+		position = Vector2(
+			viewport_size.x / 2, randf_range(screen_offset, viewport_size.y - screen_offset)
+		)
 
 	# Calculate the launch angle
 	var launch_angle = randf_range(-launch_angle_range, launch_angle_range)
@@ -57,6 +67,7 @@ func _physics_process(delta):
 		if collision.get_collider() is Paddle:
 			speed += speed_increase
 			velocity = velocity.normalized() * speed
+
 
 # TODO: implement scoring system
 func _on_visible_on_screen_notifier_2d_screen_exited():
