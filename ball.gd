@@ -59,7 +59,10 @@ func launch_ball(side: Ball.LaunchSide):
 
 
 func _ready():
-	# TODO: add a small delay on initial launch
+	position = Vector2(get_viewport_rect().size / 2)
+
+
+func _on_timer_timeout():
 	launch_ball(LaunchSide.RANDOM)
 
 

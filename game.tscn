@@ -60,6 +60,11 @@ shape = SubResource("CircleShape2D_05fki")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Ball"]
 rect = Rect2(-4, -4, 8, 8)
 
+[node name="Timer" type="Timer" parent="Ball"]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
 [node name="WallTop" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
@@ -73,3 +78,4 @@ shape = SubResource("WorldBoundaryShape2D_7ab5s")
 
 [connection signal="round_won" from="Ball" to="." method="_on_ball_round_won"]
 [connection signal="screen_exited" from="Ball/VisibleOnScreenNotifier2D" to="Ball" method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="Ball/Timer" to="Ball" method="_on_timer_timeout"]
