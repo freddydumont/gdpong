@@ -1,7 +1,7 @@
 class_name Paddle
 extends StaticBody2D
 
-@export var is_player := false
+@export var is_left := false
 
 @export_group("Movement")
 @export var speed := 12
@@ -22,7 +22,7 @@ func _ready():
 	var screen_size := get_viewport_rect().size
 
 	# place the paddles on the screen
-	if is_player:
+	if is_left:
 		position = Vector2(padding_x, screen_size.y / 2)
 	else:
 		position = Vector2(screen_size.x - padding_x, screen_size.y / 2)

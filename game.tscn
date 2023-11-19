@@ -41,12 +41,12 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Player" parent="." instance=ExtResource("3_y6mnr")]
-is_player = true
+[node name="PaddleLeft" parent="." instance=ExtResource("3_y6mnr")]
+is_left = true
 up_key = "p1_up"
 down_key = "p1_down"
 
-[node name="Enemy" parent="." instance=ExtResource("3_y6mnr")]
+[node name="PaddleRight" parent="." instance=ExtResource("3_y6mnr")]
 up_key = "p2_up"
 down_key = "p2_down"
 
