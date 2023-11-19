@@ -1,15 +1,25 @@
 class_name Paddle
 extends StaticBody2D
 
-@export var speed = 12
-@export var is_player: bool = false
-@export var padding_x = 16
+@export var is_player := false
+
+@export_group("Movement")
+@export var speed := 12
+@export var acceleration := 16
+var velocity := Vector2.ZERO
+
+@export_group("Controls")
+@export var up_key := ""
+@export var down_key := ""
+
+@export_group("Shape")
+@export var padding_x := 16
 ## Actual size of the paddle drawn
 @export var size: Vector2 = Vector2(8, 32)
 
 
 func _ready():
-	var screen_size = get_viewport_rect().size
+	var screen_size := get_viewport_rect().size
 
 	# place the paddles on the screen
 	if is_player:
@@ -24,3 +34,18 @@ func _ready():
 func _draw():
 	# first arg places the origin on the top left corner
 	draw_rect(Rect2(-(size / 2), size), Color.WHITE)
+
+
+func _physics_process(delta):
+	var target_velocity := Vector2.ZERO
+
+	if Input.is_action_pressed(up_key):
+		target_velocity.y = -speed
+	if Input.is_action_pressed(down_key):
+		target_velocity.y = speed
+
+	# Using lerp to create a smooth transition from current velocity to target velocity,
+	# which gives the feeling of acceleration/friction
+	velocity.y = lerp(velocity.y, target_velocity.y, acceleration * delta)
+
+	move_and_collide(velocity)
