@@ -71,12 +71,14 @@ func _physics_process(delta):
 	if collision:
 		velocity = velocity.bounce(collision.get_normal())
 
+		# TODO: update paddle collision logic so that the bounce
+		# 			depends on where it hits on the paddle
 		if collision.get_collider() is Paddle:
 			# when ball collides with paddle, increase its speed
 			speed += speed_increase
 
 			velocity = velocity.normalized()
-			
+
 			# Limit the angle of the bounce to a certain range so it doesn't go straight up
 			if abs(velocity.x) < 0.75:
 				velocity.x = 0.75 if velocity.x > 0 else -0.75
