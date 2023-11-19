@@ -71,11 +71,18 @@ func _physics_process(delta):
 	if collision:
 		velocity = velocity.bounce(collision.get_normal())
 
-		# when ball collides with paddle, increase its speed
 		if collision.get_collider() is Paddle:
+			# when ball collides with paddle, increase its speed
 			speed += speed_increase
-			# TODO: limit collisions on paddles to avoid ball going straight up
-			velocity = velocity.normalized() * speed
+
+			velocity = velocity.normalized()
+			
+			# Limit the angle of the bounce to a certain range so it doesn't go straight up
+			if abs(velocity.x) < 0.75:
+				velocity.x = 0.75 if velocity.x > 0 else -0.75
+				velocity.y = sign(velocity.y) * sqrt(1 - velocity.x ** 2)
+
+			velocity = velocity * speed
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
