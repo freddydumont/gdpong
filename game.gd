@@ -30,4 +30,5 @@ func _on_ball_round_won(winner: RoundWinner):
 	#		* Display a message eg. P1 wins or P2 wins
 	#		* Reset the game
 	if score[winner] == 11:
-		Panku.notify("gg")
+		$Messages/Label.text = "Player %s wins!" % str(winner + 1)
+		$Messages/Label.show()

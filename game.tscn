@@ -41,6 +41,21 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Messages" type="BoxContainer" parent="."]
+offset_top = 128.0
+offset_right = 640.0
+offset_bottom = 264.0
+alignment = 1
+vertical = true
+
+[node name="Label" type="Label" parent="Messages"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "Player 1 won"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="PaddleLeft" parent="." instance=ExtResource("3_y6mnr")]
 is_left = true
 up_key = "p1_up"

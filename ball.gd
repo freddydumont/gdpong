@@ -6,7 +6,7 @@ const RoundWinner = preload("res://common.gd").RoundWinner
 signal round_won(winner: RoundWinner)
 
 @export var color := Color.WHITE
-@export var initial_speed := 240
+@export var initial_speed := 300
 @export var speed_increase := 60
 ## The maximum angle variation from the horizontal axis (in degrees).
 ## Goes in both y and -y so total sector is var * 2
