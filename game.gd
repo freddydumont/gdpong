@@ -20,8 +20,14 @@ func _draw():
 	)
 
 
-# TODO: implement game win when a player reaches 11
 func _on_ball_round_won(winner: RoundWinner):
 	score[winner] += 1
 	$Scores/ScoreLeft.text = str(score[0])
 	$Scores/ScoreRight.text = str(score[1])
+
+	# TODO: implement game win when a player reaches 11
+	#		* Pause the game
+	#		* Display a message eg. P1 wins or P2 wins
+	#		* Reset the game
+	if score[winner] == 11:
+		Panku.notify("gg")
