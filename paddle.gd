@@ -36,8 +36,9 @@ func initialize():
 
 
 func _ready():
-	# connect to the game ended signal
+	# connect to the game end and restart signals
 	(get_parent() as Game).game_ended.connect(_on_game_game_ended)
+	(get_parent() as Game).game_restarted.connect(_on_game_game_restarted)
 
 	initialize()
 
@@ -65,3 +66,7 @@ func _physics_process(delta):
 func _on_game_game_ended():
 	self.hide()
 	self.collision_layer = 2
+
+
+func _on_game_game_restarted():
+	initialize()

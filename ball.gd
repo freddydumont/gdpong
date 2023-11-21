@@ -29,6 +29,7 @@ func _draw():
 
 func initialize():
 	can_process_screen_exited = true
+	velocity = Vector2.ZERO
 	position = Vector2(get_viewport_rect().size / 2)
 
 
@@ -119,3 +120,8 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 func _on_game_game_ended():
 	can_process_screen_exited = false
+
+
+func _on_game_game_restarted():
+	initialize()
+	($Timer as Timer).start()

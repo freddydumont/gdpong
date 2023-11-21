@@ -53,6 +53,12 @@ text = "Player 1 won"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="GameRestartTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Walls" parent="." instance=ExtResource("4_7mvcd")]
+
 [node name="PaddleLeft" parent="." instance=ExtResource("3_y6mnr")]
 is_left = true
 up_key = "p1_up"
@@ -78,9 +84,9 @@ wait_time = 0.5
 one_shot = true
 autostart = true
 
-[node name="Walls" parent="." instance=ExtResource("4_7mvcd")]
-
 [connection signal="game_ended" from="." to="Ball" method="_on_game_game_ended"]
+[connection signal="game_restarted" from="." to="Ball" method="_on_game_game_restarted"]
+[connection signal="timeout" from="GameRestartTimer" to="." method="_on_game_restart_timer_timeout"]
 [connection signal="round_won" from="Ball" to="." method="_on_ball_round_won"]
 [connection signal="screen_exited" from="Ball/VisibleOnScreenNotifier2D" to="Ball" method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="timeout" from="Ball/Timer" to="Ball" method="_on_timer_timeout"]
