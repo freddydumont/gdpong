@@ -18,10 +18,14 @@ var velocity := Vector2.ZERO
 @export var size: Vector2 = Vector2(8, 32)
 
 
-func _ready():
-	var screen_size := get_viewport_rect().size
+func initialize():
+	# reset visibility and collisions
+	self.show()
+	self.collision_layer = 1
 
 	# place the paddles on the screen
+	var screen_size := get_viewport_rect().size
+
 	if is_left:
 		position = Vector2(padding_x, screen_size.y / 2)
 	else:
@@ -29,6 +33,13 @@ func _ready():
 		# collider isn't the same shape as the paddle, it's just the front
 		# it's drawn in the UI for the player, and flipped here for the enemy
 		$CollisionShape2D.position = -$CollisionShape2D.position
+
+
+func _ready():
+	# connect to the game ended signal
+	(get_parent() as Game).game_ended.connect(_on_game_game_ended)
+
+	initialize()
 
 
 func _draw():
@@ -49,3 +60,8 @@ func _physics_process(delta):
 	velocity.y = lerp(velocity.y, target_velocity.y, acceleration * delta)
 
 	move_and_collide(velocity)
+
+
+func _on_game_game_ended():
+	self.hide()
+	self.collision_layer = 2

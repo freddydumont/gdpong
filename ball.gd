@@ -13,6 +13,7 @@ signal round_won(winner: RoundWinner)
 @export var launch_angle_range := 60
 
 var speed := initial_speed
+var can_process_screen_exited := true
 
 enum LaunchSide {
 	LEFT,
@@ -24,6 +25,11 @@ enum LaunchSide {
 func _draw():
 	var radius = $CollisionShape2D.shape.radius
 	draw_circle(Vector2.ZERO, radius, color)
+
+
+func initialize():
+	can_process_screen_exited = true
+	position = Vector2(get_viewport_rect().size / 2)
 
 
 ## Launches the ball in a random direction when the game starts.
@@ -59,7 +65,7 @@ func launch_ball(side: Ball.LaunchSide):
 
 
 func _ready():
-	position = Vector2(get_viewport_rect().size / 2)
+	initialize()
 
 
 func _on_timer_timeout():
@@ -99,12 +105,17 @@ func _physics_process(delta):
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
-	if position.x < 0:
-		round_won.emit(RoundWinner.RIGHT)
-		launch_ball(LaunchSide.LEFT)
-	elif position.x > get_viewport_rect().size.x:
-		round_won.emit(RoundWinner.LEFT)
-		launch_ball(LaunchSide.RIGHT)
-	else:
-		printerr("ball exited screen at unexpected position: ", position)
-		launch_ball(LaunchSide.RANDOM)
+	if can_process_screen_exited:
+		if position.x < 0:
+			round_won.emit(RoundWinner.RIGHT)
+			launch_ball(LaunchSide.LEFT)
+		elif position.x > get_viewport_rect().size.x:
+			round_won.emit(RoundWinner.LEFT)
+			launch_ball(LaunchSide.RIGHT)
+		else:
+			printerr("ball exited screen at unexpected position: ", position)
+			launch_ball(LaunchSide.RANDOM)
+
+
+func _on_game_game_ended():
+	can_process_screen_exited = false
