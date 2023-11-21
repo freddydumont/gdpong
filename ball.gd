@@ -46,7 +46,7 @@ func initialize():
 ## On reset, launches in the direction of the loser
 func launch_ball(side: Ball.LaunchSide):
 	var viewport_size = get_viewport_rect().size
-	var screen_offset = get_parent().OFFSET
+	var screen_offset = (get_parent() as Game).dashed_line_padding
 
 	speed = initial_speed
 	velocity = Vector2.ZERO
@@ -80,6 +80,7 @@ func _physics_process(delta):
 	if collision:
 		var collider := collision.get_collider()
 		if collider is Paddle:
+			($SoundPaddle as AudioStreamPlayer).play()
 			# when ball collides with paddle, increase its speed
 			speed += speed_increase
 
@@ -94,6 +95,7 @@ func _physics_process(delta):
 			velocity.y = speed * sin(bounce_angle)
 		else:
 			# For collisions with top and bottom walls
+			($SoundWall as AudioStreamPlayer).play()
 			velocity = velocity.bounce(collision.get_normal())
 
 		velocity = velocity.normalized()
@@ -108,6 +110,7 @@ func _physics_process(delta):
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	if can_process_screen_exited:
+		($SoundScore as AudioStreamPlayer).play()
 		if position.x < 0:
 			round_won.emit(RoundWinner.RIGHT)
 			launch_ball(LaunchSide.LEFT)
