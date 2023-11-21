@@ -88,12 +88,15 @@ autostart = true
 
 [node name="SoundPaddle" type="AudioStreamPlayer" parent="Ball"]
 stream = ExtResource("5_no2xt")
+volume_db = -10.0
 
 [node name="SoundWall" type="AudioStreamPlayer" parent="Ball"]
 stream = ExtResource("6_t4il4")
+volume_db = -10.0
 
 [node name="SoundScore" type="AudioStreamPlayer" parent="Ball"]
 stream = ExtResource("7_72i1f")
+volume_db = -10.0
 
 [connection signal="game_ended" from="." to="Ball" method="_on_game_game_ended"]
 [connection signal="game_restarted" from="." to="Ball" method="_on_game_game_restarted"]
