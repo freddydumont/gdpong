@@ -13,6 +13,7 @@ signal round_won(winner: RoundWinner)
 @export var launch_angle_range := 60
 
 var speed := initial_speed
+## When false, allows the ball to bounce on the off-screen walls
 var can_process_screen_exited := true
 
 enum LaunchSide {
@@ -25,6 +26,14 @@ enum LaunchSide {
 func _draw():
 	var radius = $CollisionShape2D.shape.radius
 	draw_circle(Vector2.ZERO, radius, color)
+
+
+func _ready():
+	initialize()
+
+
+func _on_timer_timeout():
+	launch_ball(LaunchSide.RANDOM)
 
 
 func initialize():
@@ -63,14 +72,6 @@ func launch_ball(side: Ball.LaunchSide):
 
 	# Set the velocity according to the launch angle and speed
 	velocity = Vector2(cos(launch_angle), sin(launch_angle)).normalized() * speed
-
-
-func _ready():
-	initialize()
-
-
-func _on_timer_timeout():
-	launch_ball(LaunchSide.RANDOM)
 
 
 func _physics_process(delta):

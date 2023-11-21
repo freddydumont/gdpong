@@ -18,6 +18,19 @@ var velocity := Vector2.ZERO
 @export var size: Vector2 = Vector2(8, 32)
 
 
+func _draw():
+	# first arg places the origin on the top left corner
+	draw_rect(Rect2(-(size / 2), size), Color.WHITE)
+
+
+func _ready():
+	# connect to the game end and restart signals
+	(get_parent() as Game).game_ended.connect(_on_game_game_ended)
+	(get_parent() as Game).game_restarted.connect(_on_game_game_restarted)
+
+	initialize()
+
+
 func initialize():
 	# reset visibility and collisions
 	self.show()
@@ -31,21 +44,8 @@ func initialize():
 	else:
 		position = Vector2(screen_size.x - padding_x, screen_size.y / 2)
 		# collider isn't the same shape as the paddle, it's just the front
-		# it's drawn in the UI for the player, and flipped here for the enemy
+		# it's drawn in the UI for the left player, and flipped here for the right
 		$CollisionShape2D.position = -$CollisionShape2D.position
-
-
-func _ready():
-	# connect to the game end and restart signals
-	(get_parent() as Game).game_ended.connect(_on_game_game_ended)
-	(get_parent() as Game).game_restarted.connect(_on_game_game_restarted)
-
-	initialize()
-
-
-func _draw():
-	# first arg places the origin on the top left corner
-	draw_rect(Rect2(-(size / 2), size), Color.WHITE)
 
 
 func _physics_process(delta):
@@ -63,6 +63,7 @@ func _physics_process(delta):
 	move_and_collide(velocity)
 
 
+## Hides the paddles and prevent collissions with the ball
 func _on_game_game_ended():
 	self.hide()
 	self.collision_layer = 2
